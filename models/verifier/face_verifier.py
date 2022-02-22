@@ -1,7 +1,7 @@
-from keras.layers import Lambda, Input
-from keras.models import Model
-from keras import backend as K
 import tensorflow as tf
+from tensorflow.keras.models import *
+from tensorflow.keras.layers import *
+from tensorflow.keras import backend as K
 import numpy as np
 import cv2
 from scipy.spatial import distance
@@ -73,7 +73,7 @@ class FaceVerifier():
         
     def resize_tensor(self, size):
         input_tensor = Input((None, None, 3)) 
-        output_tensor = Lambda(lambda x: tf.image.resize_bilinear(x, [size, size]))(input_tensor)
+        output_tensor = Lambda(lambda x: tf.compat.v1.image.resize_bilinear(x, [size, size]))(input_tensor)
         return Model(input_tensor, output_tensor)
         
     def preprocess(self):        
